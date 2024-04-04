@@ -1,0 +1,304 @@
+$(document).ready(function() {
+    // contato - validação
+    if ($('#form-contato').length !== 0) {
+        $('#form-contato').validate({
+            rules: {
+                nome: { required: true },
+                email: { required: true, email: true },
+                mensagem: { required: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // envio de erros - validação
+    if ($('#form-erro').length !== 0) {
+        $('#form-erro').validate({
+            rules: {
+                email: { required: true, email: true },
+                mensagem: { required: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // envio por e-mail - validação
+    if ($('#form-email').length !== 0) {
+        $('#form-email').validate({
+            rules: {
+                email: { email: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // newsletter - validação
+    if ($('#form-newsletter').length !== 0) {
+        $('#form-newsletter').validate({
+            rules: {
+                'submitted[nome]': { required: true },
+                'submitted[email]': { required: true, email: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                // disable the submit button
+                $(form).find('button[type="submit"]').prop('disabled', true);
+                $(form).find('button[type="submit"]').html('Enviando...');
+
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // newsletter (footer) - validação
+    if ($('#form-newsletter-footer').length !== 0) {
+        $('#form-newsletter-footer').validate({
+            rules: {
+                'submitted[nome]': { required: true },
+                'submitted[email]': { required: true, email: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // newsletter (sidebar) - validação
+    if ($('#form-newsletter-sidebar').length !== 0) {
+        $('#form-newsletter-sidebar').validate({
+            rules: {
+                'submitted[nome]': { required: true },
+                'submitted[email]': { required: true, email: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // carreira - validação
+    if ($('#form-carreira').length !== 0) {
+        $('#form-carreira').validate({
+            rules: {
+                title: { required: true },
+                nome_resp: { required: true },
+                email_resp: { required: true },
+                email_cvs: { required: true, email: true }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            },
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function(error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function(form) {
+                var widgetId = $(form).find('.invisible-recaptcha').attr('data-widget-id');
+                if (grecaptcha.getResponse(widgetId)) {
+                    // 2) finally sending form data
+                    $(form).find('button[type="submit"]').attr('disabled', true);
+                    form.submit();
+                } else {
+                    // 1) Before sending we must validate captcha
+                    grecaptcha.reset(widgetId);
+                    grecaptcha.execute(widgetId);
+                }
+            }
+        });
+    }
+
+    // Controle do tamanho do texto
+    $('.text-resize a.changer').click(function() {
+        var $content = $('.article-body .content-body');
+        var sizes = ['13px', '16px', '18px', '20px'];
+        var currentSize = $content.css('font-size');
+        var currentPosition = $.inArray(currentSize, sizes);
+        var change = 0;
+        if ($(this).hasClass('increase')) {
+            change = 1;
+        } else {
+            change = -1;
+        }
+        var newSize = sizes[currentPosition + change] != undefined ? sizes[currentPosition + change] : currentSize;
+        $content.css('font-size', newSize);
+    });
+
+    // colorbox
+    $('a.colorbox').colorbox({
+        rel: 'gallery',
+        width: '100%'
+    });
+
+    // Handles clicks in the mosaic
+    $('.mosaic .item').click(function(e) {
+        e.preventDefault();
+        var link = $(this).find('a').first().attr('href');
+        window.location.href = link;
+        return false;
+    });
+
+    // Handles clicks in news cards
+    $('.card-news .picture').click(function(e) {
+        e.preventDefault();
+        var link = $(this).parent().find('a').first().attr('href');
+        window.location.href = link;
+        return false;
+    });
+});

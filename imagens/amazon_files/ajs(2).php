@@ -1,0 +1,3 @@
+var OX_100ac700 = '';
+OX_100ac700 += "<"+"div id=\'beacon_29182980f7\' style=\'position: absolute; left: 0px; top: 0px; visibility: hidden;\'><"+"img src=\'https://www.baguete.com.br/revive/www/delivery/lg.php?bannerid=0&amp;campaignid=0&amp;zoneid=4&amp;loc=https%3A%2F%2Fwww.baguete.com.br%2Fnoticias%2F02%2F04%2F2024%2Famazon-quer-extinguir-tecnologia-just-walk-out&amp;referer=https%3A%2F%2Fwww.google.com%2F&amp;cb=29182980f7\' width=\'0\' height=\'0\' alt=\'\' style=\'width: 0px; height: 0px;\' /><"+"/div><"+"script type=\'text/javascript\'>document.context=\'Yjo0NjQjYjozMTJ8\'; <"+"/script>\n";
+document.write(OX_100ac700);

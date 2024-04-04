@@ -1,0 +1,60 @@
+// Callback for rendering the recaptchas
+function onloadCallbackRecaptcha() {
+    $('.invisible-recaptcha').each(function() {
+        var widgetId = grecaptcha.render($(this).attr('id'), {
+            'sitekey': recaptcha_public_key,
+            'size': 'invisible',
+            'callback': $(this).attr('data-callback')
+        });
+        $(this).attr('data-widget-id', widgetId);
+    });
+}
+
+// Invisible reCAPTCHA callback para o form de newsletter
+function onNewsletterSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-newsletter').submit();
+    return true;
+}
+
+// Invisible reCAPTCHA callback para o form de newsletter no rodapé
+function onNewsletterFooterSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-newsletter-footer').submit();
+    return true;
+}
+
+// Invisible reCAPTCHA callback para o form de newsletter no sidebar
+function onNewsletterSidebarSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-newsletter-sidebar').submit();
+    return true;
+}
+
+// Invisible reCAPTCHA callback para o form de contato
+function onContactSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-contato').submit();
+    return true;
+}
+
+// Invisible reCAPTCHA callback para o form de carreira
+function onCarreiraSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-carreira').submit();
+    return true;
+}
+
+// Invisible reCAPTCHA callback para o form de envio de erros
+function onErroSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-erro').submit();
+    return true;
+}
+
+// Invisible reCAPTCHA callback para o form de envio por e-mail
+function onEmailSubmit(token) {
+    // submit the form which now includes a g-recaptcha-response input
+    $('#form-email').submit();
+    return true;
+}

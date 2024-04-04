@@ -1,0 +1,138 @@
+$(document).ready(function(){
+    // adiciona ou modifica validações no jQuery Validation
+    $.validator.addMethod('date', function(value, element) {
+        return this.optional(element) || /^[0-3][0-9]\/[0-3][0-9]\/[0-2][0-9]{3}$/i.test(value);
+    });
+    $.validator.addMethod('time', function(value, element) {
+        return this.optional(element) || /^(2[0-3]|[01][0-9]):[0-5][0-9]$/i.test(value);
+    });
+    $.validator.addMethod('phone', function(value, element) {
+        value = value.replace('(', '');
+        value = value.replace(')', '');
+        value = value.replace('-', '');
+        return this.optional(element) || /[0-9]{8,10}/.test(value);
+    });
+
+    // cnpj
+    $.validator.addMethod('cnpj', function(cnpj, element) {
+        cnpj = $.trim(cnpj);
+
+        // deixa apenas os números
+        cnpj = cnpj.replace('/', '');
+        cnpj = cnpj.replace('.', '');
+        cnpj = cnpj.replace('.', '');
+        cnpj = cnpj.replace('-', '');
+
+        var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
+        digitos_iguais = 1;
+
+        if (cnpj.length < 14 && cnpj.length < 15) {
+            return this.optional(element) || false;
+        }
+        for (i = 0; i < cnpj.length - 1; i++) {
+            if (cnpj.charAt(i) != cnpj.charAt(i + 1)) {
+                digitos_iguais = 0;
+                break;
+            }
+        }
+
+        if (!digitos_iguais) {
+            tamanho = cnpj.length - 2;
+            numeros = cnpj.substring(0, tamanho);
+            digitos = cnpj.substring(tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2) {
+                    pos = 9;
+                }
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(0)) {
+                return this.optional(element) || false;
+            }
+            tamanho = tamanho + 1;
+            numeros = cnpj.substring(0, tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2) {
+                    pos = 9;
+                }
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(1)) {
+                return this.optional(element) || false;
+            }
+            return this.optional(element) || true;
+        } else {
+            return this.optional(element) || false;
+        }
+    });
+
+    // cpf
+    $.validator.addMethod('cpf', function(value, element) {
+        value = $.trim(value);
+        value = value.replace('.', '');
+        value = value.replace('.', '');
+        cpf = value.replace('-', '');
+        while (cpf.length < 11) {
+            cpf = '0' + cpf;
+        }
+        var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+        var a = [];
+        var b = new Number;
+        var c = 11;
+        for (i = 0; i < 11; i++) {
+            a[i] = cpf.charAt(i);
+            if (i < 9) b += (a[i] * --c);
+        }
+        if ((x = b % 11) < 2) {
+            a[9] = 0;
+        } else {
+            a[9] = 11 - x;
+        }
+        b = 0;
+        c = 11;
+        for (y = 0; y < 10; y++) {
+            b += (a[y] * c--);
+        }
+        if ((x = b % 11) < 2) {
+            a[10] = 0;
+        } else {
+            a[10] = 11 - x;
+        }
+        if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) {
+            return this.optional(element) || false;
+        }
+        return this.optional(element) || true;
+    });
+
+    // traduz mensagens do jQuery Validation
+    $.extend($.validator.messages, {
+        required: 'Este campo &eacute; obrigat&oacute;rio.',
+        remote: 'Por favor, corrija este campo.',
+        email: 'Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.',
+        url: 'Por favor, forne&ccedil;a uma URL v&aacute;lida.',
+        date: 'Por favor, forne&ccedil;a uma data v&aacute;lida.',
+        dateISO: 'Por favor, forne&ccedil;a uma data v&aacute;lida (no formato ISO).',
+        time: 'Por favor, forne&ccedil;a um hor&aacute;rio v&aacute;lido.',
+        phone: 'Por favor, forne&ccedil;a um telefone v&aacute;lido.',
+        number: 'Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.',
+        digits: 'Por favor, forne&ccedil;a somente d&iacute;gitos.',
+        creditcard: 'Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.',
+        equalTo: 'Por favor, forne&ccedil;a o mesmo valor novamente.',
+        accept: 'Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.',
+        maxlength: jQuery.validator.format('Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres.'),
+        minlength: jQuery.validator.format('Por favor, forne&ccedil;a ao menos {0} caracteres.'),
+        rangelength: jQuery.validator.format('Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento.'),
+        range: jQuery.validator.format('Por favor, forne&ccedil;a um valor entre {0} e {1}.'),
+        max: jQuery.validator.format('Por favor, forne&ccedil;a um valor menor ou igual a {0}.'),
+        min: jQuery.validator.format('Por favor, forne&ccedil;a um valor maior ou igual a {0}.'),
+        cnpj: 'CNPJ inválido.',
+        cpf: 'CPF inválido.'
+    });
+});
